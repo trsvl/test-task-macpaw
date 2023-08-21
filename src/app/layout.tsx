@@ -1,6 +1,13 @@
+"use client";
+
 import "./globals.scss";
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
+import Image from "next/image";
+import styles from "./page.module.scss";
+import LeftNav from "@/components/LeftNav";
+import { useState } from "react";
+import Link from "next/link";
 
 const jost = Jost({ subsets: ["latin"], display: "fallback" });
 
@@ -14,9 +21,43 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [selectedPage, setSelectedPage] = useState<
+    "voting" | "breeds" | "gallery" | ""
+  >("");
+
   return (
     <html lang="en">
-      <body className={jost.className}>{children}</body>
+      <body className={jost.className}>
+        <header className={styles.navigation}>
+          <Link
+            href={"/"}
+            onClick={() => setSelectedPage("")}
+            className={styles.logo}
+          >
+            <Image
+              src={"images/logo.svg"}
+              width={24}
+              height={24}
+              priority
+              alt={"Logo"}
+            />
+            <Image
+              src={"images/PetsPaw.svg"}
+              width={72}
+              height={13}
+              priority
+              alt={"Logo text"}
+            />
+          </Link>
+        </header>
+        <div>
+          <LeftNav
+            selectedPage={selectedPage}
+            setSelectedPage={setSelectedPage}
+          />
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
