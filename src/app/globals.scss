@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 30px;
+  background: #f8f8f7;
+}
+
+h1 {
+  display: inline;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 58px;
+  color: #1d1d1d;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #8c8c8c;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1d1d1d;
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 20px;
+  }
+}
