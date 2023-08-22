@@ -3,7 +3,6 @@ import styles from "./page.module.scss";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
       <div className={styles.right}>
         <Image
           src={"/images/girl-and-pet.png"}
@@ -14,6 +13,5 @@ export default function Home() {
           className={styles.right__image}
         />
       </div>
-    </main>
   );
 }

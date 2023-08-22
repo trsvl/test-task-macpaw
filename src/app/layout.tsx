@@ -4,10 +4,13 @@ import "./globals.scss";
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import Image from "next/image";
-import styles from "./page.module.scss";
-import LeftNav from "@/components/LeftNav";
-import { useState } from "react";
+import LeftSide from "@/components/LeftSide/LeftSide";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Header from "@/components/Header/Header";
+import axios from "axios"
+import RightSide from "@/components/RightSide/RightSide";
+import { GetPath } from "@/functions/GetPath";
 
 const jost = Jost({ subsets: ["latin"], display: "fallback" });
 
@@ -21,42 +24,40 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [selectedPage, setSelectedPage] = useState<
-    "voting" | "breeds" | "gallery" | ""
-  >("");
+  // const [currentPath, setcurrentPath] = useState<
+  //   "voting" | "breeds" | "gallery" | "likes" | "favourites" | "dislikes" | ""
+  // >("");
+
+  const currentPath = GetPath();
+
+  useEffect(() => {
+    axios
+      .get("/api/voting/favourites")
+      .then((response) => {
+
+        console.log(response.data.votes);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <html lang="en">
       <body className={jost.className}>
-        <header className={styles.navigation}>
-          <Link
-            href={"/"}
-            onClick={() => setSelectedPage("")}
-            className={styles.logo}
-          >
-            <Image
-              src={"images/logo.svg"}
-              width={24}
-              height={24}
-              priority
-              alt={"Logo"}
-            />
-            <Image
-              src={"images/PetsPaw.svg"}
-              width={72}
-              height={13}
-              priority
-              alt={"Logo text"}
-            />
-          </Link>
-        </header>
-        <div>
-          <LeftNav
-            selectedPage={selectedPage}
-            setSelectedPage={setSelectedPage}
+        <Header  currentPath={currentPath}/>
+        <main>
+          <LeftSide currentPath={currentPath}
           />
-        </div>
-        {children}
+          {currentPath !== "" ?
+          <RightSide currentPath={currentPath}>
+          {children}
+          </RightSide>
+          : children
+          }
+          
+         
+        </main>
       </body>
     </html>
   );

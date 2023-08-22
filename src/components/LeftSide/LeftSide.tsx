@@ -1,25 +1,23 @@
 import Image from "next/image";
 import React from "react";
-import styles from "../app/page.module.scss";
+import styles from "./left.module.scss";
 import Link from "next/link";
-interface LeftNavProps {
-  selectedPage: "voting" | "breeds" | "gallery" | "";
-  setSelectedPage: (pageName: "voting" | "breeds" | "gallery" | "") => void;
-}
+import { currentPageProps } from "@/Interfaces/SelectedPageInterface";
 
-export default function LeftNav({
-  selectedPage,
-  setSelectedPage,
-}: LeftNavProps) {
+
+export default function LeftSide({
+  currentPath,
+}: currentPageProps) {
+
   return (
     <div className={styles.left}>
       <h1>Hi!👋</h1>
       <h2>Welcome to MacPaw Bootcamp 2023</h2>
       <h3>Lets start using The Cat API</h3>
       <div className={styles.cards}>
-        <Link href={"/voting"} onClick={() => setSelectedPage("voting")}>
+        <Link href={"/voting"}>
           <div
-            className={selectedPage === "voting" ? styles.active__border : ""}
+            className={currentPath === "voting" ? styles.active__border : ""}
           >
             <Image
               src={"/images/vote-table.svg"}
@@ -29,14 +27,14 @@ export default function LeftNav({
             />
           </div>
           <button
-            className={selectedPage === "voting" ? styles.active__btn : ""}
+            className={currentPath === "voting" ? styles.active__btn : ""}
           >
             VOTING
           </button>
         </Link>
-        <Link href={"/breeds"} onClick={() => setSelectedPage("breeds")}>
+        <Link href={"/breeds"} >
           <div
-            className={selectedPage === "breeds" ? styles.active__border : ""}
+            className={currentPath === "breeds" ? styles.active__border : ""}
           >
             <Image
               src={"/images/pet-breeds.svg"}
@@ -46,14 +44,14 @@ export default function LeftNav({
             />
           </div>
           <button
-            className={selectedPage === "breeds" ? styles.active__btn : ""}
+            className={currentPath === "breeds" ? styles.active__btn : ""}
           >
             BREEDS
           </button>
         </Link>
-        <Link href={"/gallery"} onClick={() => setSelectedPage("gallery")}>
+        <Link href={"/gallery"}>
           <div
-            className={selectedPage === "gallery" ? styles.active__border : ""}
+            className={currentPath === "gallery" ? styles.active__border : ""}
           >
             <Image
               src={"/images/images-search.svg"}
@@ -63,7 +61,7 @@ export default function LeftNav({
             />
           </div>
           <button
-            className={selectedPage === "gallery" ? styles.active__btn : ""}
+            className={currentPath === "gallery" ? styles.active__btn : ""}
           >
             GALLERY
           </button>

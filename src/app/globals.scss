@@ -7,7 +7,10 @@ body {
   padding: 30px;
   background: #f8f8f7;
 }
-
+main {
+  display: flex;
+  justify-content: space-between;
+}
 h1 {
   display: inline;
   font-size: 44px;
@@ -25,9 +28,43 @@ h3 {
   font-weight: 500;
   color: #1d1d1d;
 }
+img{
+  user-select: none;
+}
+
+.loader {
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  border:16px solid;
+  border-color:#ececec;
+  border-right-color: #ff868e;
+  animation:s2 1s infinite linear;
+}
+@keyframes s2 {to{transform: rotate(1turn)}}
+
+@media (max-width: 1010px) {
+ 
+  main {
+    justify-content: center;
+  }
+}
+
+// @media (max-width: 768px) {
+//   .header {
+//     margin-left: 0;
+//   }
+//   .main {
+//     justify-content: center;
+//     margin-left: 0;
+//   }
+// }
 
 @media (max-width: 520px) {
   body {
     padding: 20px;
+  }
+  main{
+    display: block;
   }
 }
