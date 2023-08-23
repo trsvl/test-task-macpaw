@@ -2,5 +2,5 @@ export type currentPageOptions = "voting" | "breeds" | "gallery" | "likes" | "fa
 
 export interface currentPageProps {
     currentPath:
-    currentPageOptions
+    currentPageOptions;
 }

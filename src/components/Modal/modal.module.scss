@@ -1,0 +1,41 @@
+.wrapper {
+    padding: 30px;
+    box-sizing: border-box;
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background-color: #f8f8f7;
+  width: 100%;
+  height: 100%;
+  &>button {
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    height: 60px;
+    width: 60px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .second__img{
+        display: none;
+    }
+    &:hover {
+      background-color: #ff868e;
+      .first__img{
+        display: none;
+      }
+      .second__img{
+        display: block;
+      }
+    }
+  }
+  &>div{
+    margin-top: 110px;
+}
+}

@@ -8,13 +8,14 @@ $dark_pink: #ff868e;
 }
 
 .right {
-  padding: 30px;
+  padding: 20px;
   width: 680px;
   height: 782px;
   border-radius: 20px;
   background-color: #ffffff;
   box-sizing: border-box;
-
+  overflow: auto;
+  overflow-x: hidden;
 }
 .subheader{
   display: flex;
@@ -70,5 +71,11 @@ letter-spacing: 2px;
 text-align: center;
 text-transform: uppercase;
 padding: 0 30px;
+  }
+}
+
+@media (max-width: 1320px) {
+  .right {
+    width: 100%;
   }
 }

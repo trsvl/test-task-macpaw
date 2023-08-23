@@ -12,7 +12,7 @@ export default function RightSide(props: Props) {
   return (
     <div className={styles.right}>
       <div className={styles.subheader}>
-      <div className={styles.back__wrapper}>
+      <div className={styles.back__wrapper} onClick={()=>history.back()}>
         <Image
           src={"/images/back.svg"}
           width={20}

@@ -1,21 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import styles from "./page.module.scss";
-const { v4: uuidv4 } = require('uuid');
+import { blurURL } from "@/utils/StaticVar";
+import { SearchData } from "@/Interfaces/SearchData";
+const { v4: uuidv4 } = require("uuid");
 
-
-interface DataI {
-  id: string;
-  url: string;
-  width: number;
-  height: number;
-}
 
 export default function VotingPage() {
-  const [data, setData] = useState<DataI>({
+  const [data, setData] = useState<SearchData>({
     id: "",
     url: "",
     width: 0,
@@ -23,10 +18,12 @@ export default function VotingPage() {
   });
   const [clickState, setClickState] = useState<0 | 1 | 2 | 3>(0);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [trigger, setTrigger] = useState(false);
 
   useEffect(() => {
+   
     axios
-      .get("/api/voting/getimage")
+      .get("/api/images")
       .then((response) => {
         setData(response.data.currentImage);
 
@@ -34,119 +31,161 @@ export default function VotingPage() {
       })
       .finally(() => {
         setImageLoaded(true);
+       
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [trigger]);
 
-  const sendVoteHabdler = async () => {
-    try{
+  const sendLikeHandler = async () => {
+    try {
+      const sendData = {
+        image_id: data.id,
+        sub_id: uuidv4(),
+        value: 1,
+      };
+      await axios.post("/api/votes", JSON.stringify(sendData));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendFavoriteHandler = async () => {
+    try {
       const sendData = {
         sub_id: uuidv4(),
         image_id: data.id,
-      }
-      const response = await axios
-        .post("/api/voting/favourites", sendData)
-        .then(()=>{
-          console.log(response);
-        })
-    } catch(error){
-        console.log(error);
+      };
+      await axios.post("/api/favourites", JSON.stringify(sendData));
+    } catch (error) {
+      console.log(error);
     }
-   
-     
-      
+  };
+
+  const sendDislikeHandler = async () => {
+    try {
+      const sendData = {
+        image_id: data.id,
+        sub_id: uuidv4(),
+        value: 0,
+      };
+      await axios.post("/api/votes", JSON.stringify(sendData));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const clickHandler = async (number: 0 | 1 | 2 | 3) => {
-    await sendVoteHabdler();
     setClickState(number);
-    setTimeout(() => {
-      setClickState(0);
-    }, 500);
+    setImageLoaded(false);
+
+   if (number === 1) {
+      await sendLikeHandler();
+    } 
+    if (number === 2) {
+      await sendFavoriteHandler();
+    }
+    if (number === 3) {
+      await sendDislikeHandler();
+    }
+    setTrigger((prev)=>!prev)
   };
 
   return (
-      <div className={styles.img__wrapper}>
-        {imageLoaded ? (
-          <div >
- <Image
+    <div className={styles.wrapper}>
+      {imageLoaded ? (
+        <div
+          className={styles.img__wrapper}
+          style={{
+            width: `${data.width}px`,
+          }}
+        >
+          <Image
             id={data.id}
             src={data.url}
-            width={data.width}
-            height={data.height}
+            fill
+            priority
             alt="Image with cat"
-            blurDataURL="/images/preload-img.png"
-            placeholder="blur"
+            blurDataURL={blurURL}
             className={styles.current__img}
+            sizes="(max-width: 640px) 100vw"
+            onLoadingComplete={()=> setClickState(0)}
           />
-          </div>
-        ) : (
-          <div className="loader"></div>
-        )}
-        <div className={styles.buttons__wrapper}>
-          <button
-            disabled={!imageLoaded}
-            className={clickState === 1 ? styles.btn1__click : styles.btn1}
-            onClick={() => clickHandler(1)}
-          >
-            <Image
-              src={"/images/smiling-face1.svg"}
-              width={30}
-              height={30}
-              alt="Button favourite"
-            />
-            <Image
-              src={"/images/smiling-face-green.svg"}
-              width={30}
-              height={30}
-              alt="Button favourite"
-            />
-          </button>
-          <button
-            disabled={!imageLoaded}
-            className={clickState === 2 ? styles.btn2__click : styles.btn2}
-            onClick={() => clickHandler(2)}
-          >
-            <Image
-              src={"/images/favourite1.svg"}
-              width={30}
-              height={26}
-              alt="Button like"
-            />
-            <Image
-              src={"/images/favourite-color1.svg"}
-              width={30}
-              height={26}
-              alt="Button like"
-            />
-            <Image
-              src={"/images/favourite.svg"}
-              width={30}
-              height={26}
-              alt="Button like"
-            />
-          </button>
-          <button
-            disabled={!imageLoaded}
-            className={clickState === 3 ? styles.btn3__click : styles.btn3}
-            onClick={() => clickHandler(3)}
-          >
-            <Image
-              src={"/images/sad-face1.svg"}
-              width={30}
-              height={30}
-              alt="Button dislike"
-            />
-            <Image
-              src={"/images/sad-face-yellow.svg"}
-              width={30}
-              height={30}
-              alt="Button dislike"
-            />
-          </button>
         </div>
+      ) : (
+        <div className={styles.img__wrapper}>
+          <div className="loader"></div>
+        </div>
+      )}
+      <div
+        className={
+          clickState !== 0
+            ? styles.buttons__wrapper__disable
+            : styles.buttons__wrapper
+        }
+      >
+        <button
+          disabled={!imageLoaded}
+          className={clickState === 1 ? styles.btn1__click : styles.btn1}
+          onClick={() => clickState === 0 && clickHandler(1)}
+        >
+          <Image
+            src={"/images/smiling-face1.svg"}
+            width={30}
+            height={30}
+            alt="Button favourite"
+          />
+          <Image
+            src={"/images/smiling-face-green.svg"}
+            width={30}
+            height={30}
+            alt="Button favourite"
+          />
+        </button>
+        <button
+          disabled={!imageLoaded}
+          className={clickState === 2 ? styles.btn2__click : styles.btn2}
+          onClick={() => clickState === 0 && clickHandler(2)}
+        >
+          <Image
+            src={"/images/favourite1.svg"}
+            width={30}
+            height={26}
+            alt="Button like"
+          />
+          <Image
+            src={"/images/favourite-color1.svg"}
+            width={30}
+            height={26}
+            alt="Button like"
+          />
+          <Image
+            src={"/images/favourite.svg"}
+            width={30}
+            height={26}
+            alt="Button like"
+          />
+        </button>
+        <button
+          disabled={!imageLoaded}
+          className={clickState === 3 ? styles.btn3__click : styles.btn3}
+          onClick={() => clickState === 0 && clickHandler(3)}
+        >
+          <Image
+            src={"/images/sad-face1.svg"}
+            width={30}
+            height={30}
+            alt="Button dislike"
+          />
+          <Image
+            src={"/images/sad-face-yellow.svg"}
+            width={30}
+            height={30}
+            alt="Button dislike"
+          />
+        </button>
       </div>
+    </div>
   );
 }

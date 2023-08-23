@@ -1,20 +1,29 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./header.module.scss";
 import { currentPageProps } from "@/Interfaces/SelectedPageInterface";
+import { useState } from "react";
+import Modal from "../Modal/Modal";
 
-interface Props {
- 
-}
 
 export default function Header({ currentPath}: currentPageProps) {
+
+  const [clickMenu, setClickMenu] = useState(false);
+  
+  const menuClickHandler = () => {
+    setClickMenu(true)
+    document.body.style.overflow = "hidden";
+  }
  
 
   return (
-    <header className={styles.header}>
+    <header className={currentPath === "" ? styles.header : styles.header2}>
+    {clickMenu && <Modal setClickMenu={setClickMenu}/>}
       <Link
         href={"/"}
-        className={styles.logo}
+        className={currentPath === "" ? styles.logo : styles.logo__disable}
       >
         <Image
           src={"images/logo.svg"}
@@ -33,6 +42,15 @@ export default function Header({ currentPath}: currentPageProps) {
       </Link>
       {currentPath !== "" && (
         <div className={styles.header__right}>
+            <button onClick={menuClickHandler}
+          >
+              <Image
+                src={"/images/menu.svg"}
+                width={30}
+                height={18}
+                alt="Menu"
+              />
+          </button>
           <div className={styles.input__wrapper}>
             <input type="text" placeholder="Search for breeds by name" />
             <div>

@@ -9,7 +9,7 @@ $dark_pink: #ff868e;
     transform: translate(-50%, -50%);
 }
 
-.left {
+@mixin left{
   display: flex;
   flex-direction: column;
   margin-left: $ml;
@@ -24,6 +24,15 @@ $dark_pink: #ff868e;
     margin-bottom: 20px;
   }
 }
+
+.left {
+@include left();
+
+}
+.left__disable {
+  @include left();
+  
+  }
 .active__border {
   border: 4px solid $light_pink !important;
 }
@@ -94,6 +103,13 @@ $dark_pink: #ff868e;
 .active__btn {
   background-color: $dark_pink !important;
   color: #ffffff !important;
+}
+
+
+@media (max-width: 1320px) {
+  .left__disable {
+    display: none;
+  }
 }
 
 

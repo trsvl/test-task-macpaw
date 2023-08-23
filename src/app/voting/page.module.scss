@@ -1,21 +1,4 @@
-.img__wrapper{
-    margin-top: 20px;
-    margin-bottom: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-   
-    .current__img{
-        width: 100%;
-        max-width: 640px;
-        max-height: 360px;
-        object-fit: cover;
-        overflow: hidden;
-        border-radius: 20px;
-    }
-}
-.buttons__wrapper{
+@mixin wrapper($cursor) {
     display: flex;
     position: absolute;
     left: 50%;
@@ -27,7 +10,7 @@
     background-color: #ffffff;
     border: 4px solid #ffffff;
     &>button{
-        cursor: pointer;
+        cursor: $cursor;
         height: 80px;
         width: 80px;
         display: flex;
@@ -35,6 +18,33 @@
         justify-content: center;
         border: none;
 }
+}
+
+.wrapper{
+    margin-top: 20px;
+    margin-bottom: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .img__wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        height: 360px;
+        border-radius: 20px;
+    }
+    .current__img{
+        object-fit: cover;
+    }
+}
+.buttons__wrapper{
+    @include wrapper(pointer);
+}
+.buttons__wrapper__disable{
+    @include wrapper(not-allowed);
 }
 .btn1,.btn2,.btn3{
     transition: background-color .2s ease-out;

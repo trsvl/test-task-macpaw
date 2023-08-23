@@ -10,7 +10,10 @@ import Link from "next/link";
 import Header from "@/components/Header/Header";
 import axios from "axios"
 import RightSide from "@/components/RightSide/RightSide";
-import { GetPath } from "@/functions/GetPath";
+import { GetPath } from "@/utils/GetPath";
+import { SearchData } from "@/Interfaces/SearchData";
+
+
 
 const jost = Jost({ subsets: ["latin"], display: "fallback" });
 
@@ -24,23 +27,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const [currentPath, setcurrentPath] = useState<
-  //   "voting" | "breeds" | "gallery" | "likes" | "favourites" | "dislikes" | ""
-  // >("");
 
   const currentPath = GetPath();
 
-  useEffect(() => {
-    axios
-      .get("/api/voting/favourites")
-      .then((response) => {
 
-        console.log(response.data.votes);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
 
   return (
     <html lang="en">
