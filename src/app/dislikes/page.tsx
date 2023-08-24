@@ -14,8 +14,10 @@ export default function DislikesPage() {
     axios
       .get("/api/votes")
       .then((response) => {
-        setData(response.data.votes);
-        console.log(response.data.votes);
+        const filteredData = response.data.votes.filter(
+          (item: { value: number }) => item.value !== 1
+        );
+        setData(filteredData);
       })
       .finally(() => {
         setImageLoaded(true);
@@ -44,7 +46,7 @@ export default function DislikesPage() {
       clickHanlder={clickHanlder}
       allowClick={allowClick}
       imageLoaded={imageLoaded}
-      page={"likes"}
+      page={"dislikes"}
     />
   );
 }

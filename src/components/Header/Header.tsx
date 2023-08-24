@@ -3,14 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./header.module.scss";
-import { currentPageProps } from "@/Interfaces/SelectedPageInterface";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
+import { useThemeContext } from "@/utils/Theme";
+import { ThemeI } from "@/Interfaces/Theme";
 
 
-export default function Header({ currentPath}: currentPageProps) {
+export default function Header() {
 
   const [clickMenu, setClickMenu] = useState(false);
+
+  const { currentPath } = useThemeContext() as ThemeI;
   
   const menuClickHandler = () => {
     setClickMenu(true)

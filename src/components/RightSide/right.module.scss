@@ -8,30 +8,30 @@ $dark_pink: #ff868e;
 }
 
 .right {
+  margin-left: auto;
   padding: 20px;
   width: 680px;
-  height: 782px;
+  min-height: 782px;
+  max-height: 100%;
   border-radius: 20px;
   background-color: #ffffff;
   box-sizing: border-box;
-  overflow: auto;
-  overflow-x: hidden;
 }
-.subheader{
+.subheader {
   display: flex;
   gap: 10px;
-  &>div{
+  & > div {
     border-radius: 10px;
   }
 }
-.back__wrapper{
+.back__wrapper {
   cursor: pointer;
   right: 10px;
   top: 10px;
   width: 40px;
   height: 40px;
   background-color: $light_pink;
-  
+
   &:hover {
     background-color: $dark_pink;
   }
@@ -54,7 +54,7 @@ $dark_pink: #ff868e;
   }
 }
 
-.selected{
+.selected {
   user-select: none;
   background-color: $dark_pink;
   width: auto;
@@ -62,15 +62,15 @@ $dark_pink: #ff868e;
   display: flex;
   align-items: center;
   justify-content: center;
-  p{
+  p {
     color: #ffffff;
-font-size: 20px;
-font-weight: 500;
-line-height: 30px;
-letter-spacing: 2px;
-text-align: center;
-text-transform: uppercase;
-padding: 0 30px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0 30px;
   }
 }
 

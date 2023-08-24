@@ -14,8 +14,10 @@ export default function LikesPage() {
     axios
       .get("/api/votes")
       .then((response) => {
-        setData(response.data.votes);
-        console.log(response.data.votes);
+        const filteredData = response.data.votes.filter(
+          (item: { value: number }) => item.value !== 0
+        );
+        setData(filteredData);
       })
       .finally(() => {
         setImageLoaded(true);
@@ -25,7 +27,6 @@ export default function LikesPage() {
         console.error("Error fetching data:", error);
       });
   }, [clicked]);
-
   const clickHanlder = async (id: number) => {
     setAllowClick(false);
     try {

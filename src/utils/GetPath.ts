@@ -1,4 +1,4 @@
-import { currentPageOptions } from '@/Interfaces/SelectedPageInterface';
+import { currentPageOptions } from '@/Interfaces/CurrentPath';
 import { usePathname } from 'next/navigation';
 
 export function GetPath() {

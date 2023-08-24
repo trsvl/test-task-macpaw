@@ -15,7 +15,6 @@ export default function FavoritePage() {
       .get("/api/favourites")
       .then((response) => {
         setData(response.data.favourites);
-        console.log(response.data.favourites);
       })
       .finally(() => {
         setImageLoaded(true);

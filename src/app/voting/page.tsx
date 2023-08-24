@@ -6,8 +6,9 @@ import Image from "next/image";
 import styles from "./page.module.scss";
 import { blurURL } from "@/utils/StaticVar";
 import { SearchData } from "@/Interfaces/SearchData";
+import { useThemeContext } from "@/utils/Theme";
+import { getCurrentTime } from "@/utils/GetTime";
 const { v4: uuidv4 } = require("uuid");
-
 
 export default function VotingPage() {
   const [data, setData] = useState<SearchData>({
@@ -16,22 +17,20 @@ export default function VotingPage() {
     width: 0,
     height: 0,
   });
-  const [clickState, setClickState] = useState<0 | 1 | 2 | 3>(0);
+  const [clickState, setClickState] = useState<0 | 1 | 2 | 3 | 4>(4);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [trigger, setTrigger] = useState(false);
 
+  const { setImageHistory } = useThemeContext();
+
   useEffect(() => {
-   
     axios
       .get("/api/images")
       .then((response) => {
         setData(response.data.currentImage);
-
-        console.log(response.data.currentImage);
       })
       .finally(() => {
         setImageLoaded(true);
-       
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -45,7 +44,14 @@ export default function VotingPage() {
         sub_id: uuidv4(),
         value: 1,
       };
+      const sendHistory = {
+        time: getCurrentTime(),
+        id: data.id,
+        action: true,
+        value: "likes",
+      };
       await axios.post("/api/votes", JSON.stringify(sendData));
+      setImageHistory((prev) => [sendHistory, ...prev]);
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +63,14 @@ export default function VotingPage() {
         sub_id: uuidv4(),
         image_id: data.id,
       };
+      const sendHistory = {
+        time: getCurrentTime(),
+        id: data.id,
+        action: true,
+        value: "favourites",
+      };
       await axios.post("/api/favourites", JSON.stringify(sendData));
+      setImageHistory((prev) => [sendHistory, ...prev]);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +83,14 @@ export default function VotingPage() {
         sub_id: uuidv4(),
         value: 0,
       };
+      const sendHistory = {
+        time: getCurrentTime(),
+        id: data.id,
+        action: true,
+        value: "dislikes",
+      };
       await axios.post("/api/votes", JSON.stringify(sendData));
+      setImageHistory((prev) => [sendHistory, ...prev]);
     } catch (error) {
       console.log(error);
     }
@@ -80,16 +100,16 @@ export default function VotingPage() {
     setClickState(number);
     setImageLoaded(false);
 
-   if (number === 1) {
+    if (number === 1) {
       await sendLikeHandler();
-    } 
+    }
     if (number === 2) {
       await sendFavoriteHandler();
     }
     if (number === 3) {
       await sendDislikeHandler();
     }
-    setTrigger((prev)=>!prev)
+    setTrigger((prev) => !prev);
   };
 
   return (
@@ -110,7 +130,7 @@ export default function VotingPage() {
             blurDataURL={blurURL}
             className={styles.current__img}
             sizes="(max-width: 640px) 100vw"
-            onLoadingComplete={()=> setClickState(0)}
+            onLoadingComplete={() => setClickState(0)}
           />
         </div>
       ) : (

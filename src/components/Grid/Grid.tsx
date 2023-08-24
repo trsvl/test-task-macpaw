@@ -5,6 +5,8 @@ import Image from "next/image";
 import styles from "./page.module.scss";
 import { useEffect, useState } from "react";
 import { blurURL } from "@/utils/StaticVar";
+import { useThemeContext } from "@/utils/Theme";
+import { getCurrentTime } from "@/utils/GetTime";
 
 
 interface FavData {
@@ -25,7 +27,8 @@ interface GridI {
 
 export default function Grid({imageLoaded, data, allowClick, clickHanlder, page}:GridI) {
  
-    const smallImg =
+  const { setImageHistory } = useThemeContext()
+  const smallImg =
     page === "likes"
     ? "/images/smiling-face-green-small.svg"
     : page === "favourites"
@@ -33,16 +36,27 @@ export default function Grid({imageLoaded, data, allowClick, clickHanlder, page}
     : page === "dislikes"
     ? "/images/sad-face-yellow-small.svg"
     : "";
+
+    const innerClickHandler = (imageId:string, id: number) => {
+      clickHanlder(id)
+      const sendHistory = {
+        time: getCurrentTime(),
+        id: imageId,
+        action: false,
+        value: page,
+      }
+      setImageHistory((prev)=>[sendHistory, ...prev])
+    }
  
     return (
     <div className={styles.wrapper}>
     {imageLoaded ? (
       <div className={styles.grid}>
-        {data.map((item: FavData) => {
+        {data.length !== 0 ? data.map((item: FavData) => {
           return (
             <div key={item.sub_id}
             className={styles.img__wrapper}
-            onClick={()=> allowClick && clickHanlder(item.id)}
+            onClick={()=> allowClick && innerClickHandler(item.image_id, item.id)}
             style={{cursor: allowClick ? "pointer" : "not-allowed"}}
             >
               <div className={styles.bg}></div>
@@ -64,11 +78,15 @@ export default function Grid({imageLoaded, data, allowClick, clickHanlder, page}
               </div>
             </div>
           );
-        })}
+        })
+      : <div className={styles.no__item}><p>No item found</p></div>}
       </div>
     ) : (
       <div className={styles.center}>
-<div className="loader"></div>
+        <div>
+        <div className="loader"></div>
+        </div>
+
       </div>
     )}
   </div>

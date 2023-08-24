@@ -4,12 +4,14 @@
 }
 
 body {
+  background: #e7e7e7; //#f8f8f7;
   padding: 30px;
-  background: #f8f8f7;
 }
+
 main {
-  display: flex;
+  display:flex;
   justify-content: space-between;
+  overflow: auto;
 }
 h1 {
   display: inline;
@@ -41,6 +43,8 @@ img {
   border-right-color: #ff868e;
   animation: s2 1s infinite linear;
 }
+
+
 @keyframes s2 {
   to {
     transform: rotate(1turn);

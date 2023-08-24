@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import styles from "./left.module.scss";
 import Link from "next/link";
-import { currentPageProps } from "@/Interfaces/SelectedPageInterface";
+import { currentPageProps } from "@/Interfaces/CurrentPath";
 
 
 export default function Cards({

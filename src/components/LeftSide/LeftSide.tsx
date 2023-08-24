@@ -1,11 +1,14 @@
+"use client"
+
 import styles from "./left.module.scss";
-import { currentPageProps } from "@/Interfaces/SelectedPageInterface";
 import Cards from "./Cards";
+import { useThemeContext } from "@/utils/Theme";
+import { ThemeI } from "@/Interfaces/Theme";
 
 
-export default function LeftSide({
-  currentPath,
-}: currentPageProps) {
+export default function LeftSide() {
+
+  const { currentPath } = useThemeContext() as ThemeI;
 
   return (
     <div className={currentPath === "" ? styles.left : styles.left__disable}>

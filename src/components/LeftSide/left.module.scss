@@ -3,13 +3,13 @@ $light_pink: #fbe0dc;
 $dark_pink: #ff868e;
 
 @mixin center{
-    
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
 
 @mixin left{
+  position: fixed;
   display: flex;
   flex-direction: column;
   margin-left: $ml;
