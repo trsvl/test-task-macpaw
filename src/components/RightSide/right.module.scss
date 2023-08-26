@@ -7,6 +7,26 @@ $dark_pink: #ff868e;
   transform: translate(-50%, -50%);
 }
 
+@mixin selected($color, $text) {
+  user-select: none;
+  background-color: $color;
+  width: auto;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    color: $text;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0 30px;
+  }
+}
+
 .right {
   margin-left: auto;
   padding: 20px;
@@ -16,6 +36,7 @@ $dark_pink: #ff868e;
   border-radius: 20px;
   background-color: #ffffff;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .subheader {
   display: flex;
@@ -28,6 +49,7 @@ $dark_pink: #ff868e;
   cursor: pointer;
   right: 10px;
   top: 10px;
+  min-width: 40px;
   width: 40px;
   height: 40px;
   background-color: $light_pink;
@@ -55,22 +77,81 @@ $dark_pink: #ff868e;
 }
 
 .selected {
-  user-select: none;
-  background-color: $dark_pink;
-  width: auto;
-  height: 40px;
+ @include selected($dark_pink, #ffffff);
+}
+.selected1 {
+  @include selected($light_pink, $dark_pink);
+ }
+ .selected2 {
+  @include selected($dark_pink, #ffffff);
+ }
+
+.breeds__wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  p {
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 30px;
-    letter-spacing: 2px;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 0 30px;
+  gap: 10px;
+  option {
+    background-color: #f8f8f7;
+  }
+
+  & > select,button {
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    border-radius: 10px;
+    background-color: #f8f8f7;
+    height: 40px;
+    border: 2px solid #f8f8f7;
+    box-sizing: border-box;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #8c8c8c;
+    &:hover {
+      border: 2px solid #fbe0dc;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: #8c8c8c;
+    }
+  }
+  select:nth-child(1) {
+    min-width: 226px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  select:nth-child(2) {
+    min-width: 101px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  button:nth-child(3),
+  button:nth-child(4) {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img:last-child {
+      display: none;
+    }
+    &:disabled{
+      cursor: not-allowed;
+    }
+    &:hover {
+      img:first-child {
+        display: none;
+      }
+      img:last-child {
+        display: block;
+      }
+    }
   }
 }
 
@@ -78,4 +159,33 @@ $dark_pink: #ff868e;
   .right {
     width: 100%;
   }
+  .breeds__wrapper {
+    width: 100%;
+    & > div,
+    select {
+      width: 100%;
+    }
+  }
 }
+@media (max-width: 760px) {
+  .subheader {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 560px) {
+  .breeds__wrapper {
+    flex-wrap: wrap;
+  }
+  .breeds__wrapper {
+    select:nth-child(1) {
+      order: 0;
+      flex: 0 0 100%;
+    }
+    select:nth-child(2) {
+      order: 0;
+      flex: 0 0 calc(100% - 100px);
+    }
+  }
+
+}
+

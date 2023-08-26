@@ -1,0 +1,48 @@
+.wrapper {
+  display: flex;
+  margin-top: 40px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: space-between;
+
+  @mixin btn($bg, $color) {
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    width: 122px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: $bg;
+    font-family: inherit;
+    path{
+        fill: $color;
+    }
+    p {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      letter-spacing: 2px;
+      color: $color;
+    }
+  }
+  button {
+    @include btn(#fbe0dc, #FF868E);
+    &:hover{
+        @include btn(#FF868E, #ffffff);  
+    }
+    &:disabled{
+        @include btn(#F8F8F7, #8C8C8C);
+        cursor: default;  
+    }
+  }
+}
+@media (max-width: 520px){
+    .wrapper{
+        width: 250px;
+    }
+}

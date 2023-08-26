@@ -15,6 +15,13 @@ $dark_pink: #ff868e;
   justify-content: space-between;
 }
 
+@mixin logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
 .header {
  @include header()
 }
@@ -23,10 +30,10 @@ $dark_pink: #ff868e;
  }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
+@include logo();
+}
+.logo1{
+@include logo();
 }
 .header__right {
   display: flex;
@@ -123,7 +130,7 @@ $dark_pink: #ff868e;
   .header2 {
     margin-left: 0;
   }
-  .logo__disable {
+  .logo1 {
     display: none;
   }
   .header__right{

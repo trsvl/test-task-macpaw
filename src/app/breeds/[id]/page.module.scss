@@ -1,0 +1,129 @@
+$light_pink: #fbe0dc;
+$dark_pink: #ff868e;
+
+.center {
+  position: relative;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no__item {
+  margin-top: 40px;
+  height: 60px;
+  background-color: #f8f8f7;
+  padding: 18px 20px;
+
+  box-sizing: border-box;
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #8c8c8c;
+  }
+}
+.carousel {
+  margin-top: 20px;
+  div:nth-child(1) > ul {
+    bottom: 20px;
+    background-color: white;
+    width: 90px;
+    height: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -15px;
+    margin: 0;
+    li {
+      margin: 0 !important;
+    }
+  }
+}
+.img__wrapper {
+  height: 360px;
+  width: 100%;
+  position: relative;
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+  }
+}
+.text {
+  position: relative;
+  margin-top: 50px;
+  border: 2px solid $light_pink;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 26px 40px 40px;
+  box-sizing: border-box;
+}
+.name {
+  position: absolute;
+  width: 192px;
+  background-color: #ffffff;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -32px;
+  p {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 52px;
+    color: #1d1d1d;
+  }
+}
+.description {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 29px;
+  color: #8c8c8c;
+}
+.details {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  font-family: inherit;
+  div {
+    width: 50%;
+  }
+  div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  strong {
+    color: #1d1d1d;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23px;
+  }
+  p {
+    color: #8c8c8c;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
+  }
+}
+@media (max-width: 520px) {
+  .img__wrapper {
+    height: 200px;
+  }
+  .details {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: baseline;
+    div {
+      width: 100%;
+    }
+  }
+}

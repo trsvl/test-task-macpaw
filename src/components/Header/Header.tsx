@@ -26,17 +26,17 @@ export default function Header() {
     {clickMenu && <Modal setClickMenu={setClickMenu}/>}
       <Link
         href={"/"}
-        className={currentPath === "" ? styles.logo : styles.logo__disable}
+        className={currentPath === "" ? styles.logo : styles.logo1}
       >
         <Image
-          src={"images/logo.svg"}
+          src={"/images/logo.svg"}
           width={24}
           height={24}
           priority
           alt={"Logo"}
         />
         <Image
-          src={"images/PetsPaw.svg"}
+          src={"/images/PetsPaw.svg"}
           width={72}
           height={13}
           priority

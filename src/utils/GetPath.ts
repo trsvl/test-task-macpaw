@@ -7,3 +7,16 @@ export function GetPath() {
   
   return currentPath;
 }
+export function GetInnerPath() {
+  const pathname = usePathname();
+  const checkInnerPath = pathname.split("/").length;
+  
+  return checkInnerPath;
+}
+
+export function GetInnerPathId() {
+  const pathname = usePathname();
+  const checkInnerPath = pathname.split("/");
+  
+  return checkInnerPath[2];
+}

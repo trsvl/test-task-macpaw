@@ -15,7 +15,7 @@ export default function LeftSide() {
       <h1>Hi!👋</h1>
       <h2>Welcome to MacPaw Bootcamp 2023</h2>
       <h3>Lets start using The Cat API</h3>
-      <Cards currentPath={currentPath}/>
+      <Cards/>
     </div>
   );
 }

@@ -13,14 +13,24 @@ interface Props {
 export default function Modal({setClickMenu}:Props) {
   const currentPath = GetPath();
 
-  const menuClickHandler = () => {
+  const closeClickHandler = () => {
     setClickMenu(false)
     document.body.style.overflow = "visible";
   }
+  const cardClickHandler = () => {
+    setTimeout(() => {
+      setClickMenu(false)
+      document.body.style.overflow = "visible";
+    }, 500);
+
+  }
+
+
+
 
   return (
     <div className={styles.wrapper}>
-        <button onClick={menuClickHandler}>
+        <button onClick={closeClickHandler}>
         <Image
           src={"/images/close.svg"}
           width={20}
@@ -37,7 +47,7 @@ export default function Modal({setClickMenu}:Props) {
         />
         </button>
         <div>
-        <Cards currentPath={currentPath} />
+        <Cards cardClickHandler={cardClickHandler}/>
         </div>
     </div>
   );

@@ -1,6 +1,6 @@
 .wrapper {
-    padding: 30px;
-    box-sizing: border-box;
+  padding: 30px;
+  box-sizing: border-box;
   position: fixed;
   overflow: hidden;
   left: 0;
@@ -9,7 +9,7 @@
   background-color: #f8f8f7;
   width: 100%;
   height: 100%;
-  &>button {
+  & > button {
     cursor: pointer;
     position: absolute;
     right: 30px;
@@ -22,20 +22,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .second__img{
-        display: none;
+    .second__img {
+      display: none;
     }
     &:hover {
       background-color: #ff868e;
-      .first__img{
+      .first__img {
         display: none;
       }
-      .second__img{
+      .second__img {
         display: block;
       }
     }
   }
-  &>div{
+  & > div {
     margin-top: 110px;
+    display: flex;
+    justify-content: center;
+  }
 }
+
+@media (max-width: 520px) {
+  .wrapper {
+    & > div {
+      display: block;
+    }
+  }
 }

@@ -128,6 +128,7 @@ export default function VotingPage() {
             priority
             alt="Image with cat"
             blurDataURL={blurURL}
+            placeholder="blur"
             className={styles.current__img}
             sizes="(max-width: 640px) 100vw"
             onLoadingComplete={() => setClickState(0)}
