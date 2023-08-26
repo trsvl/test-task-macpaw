@@ -50,7 +50,7 @@ export default function VotingPage() {
         action: true,
         value: "likes",
       };
-      await axios.post("/api/votes", JSON.stringify(sendData));
+      await axios.post("/api/votes", sendData);
       setImageHistory((prev) => [sendHistory, ...prev]);
     } catch (error) {
       console.log(error);
@@ -69,7 +69,7 @@ export default function VotingPage() {
         action: true,
         value: "favourites",
       };
-      await axios.post("/api/favourites", JSON.stringify(sendData));
+      await axios.post("/api/favourites", sendData);
       setImageHistory((prev) => [sendHistory, ...prev]);
     } catch (error) {
       console.log(error);
@@ -89,7 +89,7 @@ export default function VotingPage() {
         action: true,
         value: "dislikes",
       };
-      await axios.post("/api/votes", JSON.stringify(sendData));
+      await axios.post("/api/votes", sendData);
       setImageHistory((prev) => [sendHistory, ...prev]);
     } catch (error) {
       console.log(error);

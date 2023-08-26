@@ -10,6 +10,7 @@ import ImageHistory from "../ImageHistory/imageHistory";
 import axios from "axios";
 import Pagination from "../Pagination/Pagination";
 import { GetInnerPath, GetInnerPathId } from "@/utils/GetPath";
+import Modal from "../Modal/Modal";
 
 interface Props {
   children: ReactNode;
@@ -23,6 +24,7 @@ export default function RightSide(props: Props) {
   const { currentPath } = useThemeContext() as ThemeI;
 
   const [data, setData] = useState<BreedsI[]>([]);
+  const [uploadClick, setUploadClick] = useState(false);
 
   const {
     selectBreed,
@@ -45,10 +47,17 @@ export default function RightSide(props: Props) {
     currentPath === "breeds" && getData();
   }, [currentPath]);
 
+  const uploadClickHandler = () => {
+    setUploadClick(true)
+    document.body.style.overflow = "hidden";
+  }
+ 
+
   return (
     <>
       {currentPath !== "" ? (
         <div className={styles.right}>
+          {uploadClick && <Modal setClickMenu={setUploadClick}/>}
           <div className={styles.subheader}>
             <div
               className={styles.back__wrapper}
@@ -83,13 +92,29 @@ export default function RightSide(props: Props) {
           </div>
             
             }
-           
+            {currentPath === "gallery" &&
+              <button onClick={uploadClickHandler} className={styles.upload__wrapper}>
+                <Image
+                src={"/images/upload.svg"}
+                width={16}
+                height={16}
+                alt="Upload"
+                />
+                   <Image
+                src={"/images/upload.svg"}
+                width={16}
+                height={16}
+                alt="Upload"
+                />
+                <div className={styles.loader}></div>
+                <p>UPLOAD</p>
+              </button>
+            }
             {currentPath === "breeds" && (
               <div className={styles.breeds__wrapper}>
                 <select
                   value={selectBreed}
                   disabled={!allowClick}
-                  style={{ cursor: allowClick ? "pointer" : "not-allowed" }}
                   onChange={(e) => {
                     page != "0" && setPage("0");
                     setSelectBreed(e.target.value);
@@ -108,7 +133,6 @@ export default function RightSide(props: Props) {
                 <select
                   value={selectLimit}
                   disabled={!allowClick}
-                  style={{ cursor: allowClick ? "pointer" : "not-allowed" }}
                   onChange={(e) => {
                     page != "0" && setPage("0");
                     setSelectLimit(e.target.value);

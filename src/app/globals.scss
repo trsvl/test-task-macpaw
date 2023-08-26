@@ -9,7 +9,7 @@ body {
 }
 
 main {
-  display:flex;
+  display: flex;
   justify-content: space-between;
 }
 h1 {
@@ -42,7 +42,6 @@ img {
   border-right-color: #ff868e;
   animation: s2 1s infinite linear;
 }
-
 
 @keyframes s2 {
   to {

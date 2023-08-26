@@ -42,13 +42,11 @@ export default function CertainBreed({ params }: { params: { id: string } }) {
   useEffect(() => {
     axios.get(`/api/breeds/inner_images/?id=${params.id}`).then((response) => {
       setImagesData(response.data.innerImages);
-      console.log(response.data.innerImages);
     });
     axios
       .get(`/api/breeds/id/?id=${params.id}`)
       .then((response) => {
         setData(response.data.breedInfo);
-        console.log(response.data.breedInfo);
       })
       .finally(() => {
         setImageLoaded(true);

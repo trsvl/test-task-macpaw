@@ -16,10 +16,15 @@ export default function BreedsPage() {
     setAllowClick,
     clicked,
     page,
+    setPage,
   } = useThemeContext();
 
   const [data, setData] = useState([]);
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    setPage("0");
+  },[])
 
   useEffect(() => {
     const getData = async () => {
@@ -29,7 +34,7 @@ export default function BreedsPage() {
       
       await axios
         .get(
-          `/api/breeds/images?limit=${selectLimit}&page=${page}&order=${sorted}&breed_ids=${selectBreed}`
+          `/api/breeds/images?limit=${selectLimit}&page=${page}&order=${sorted}&breed_ids=${selectBreed}&breed=1`
         )
         .then((response) => {
           setData(response.data.breedsImages);
