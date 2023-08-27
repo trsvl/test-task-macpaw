@@ -7,7 +7,6 @@ import { useState } from "react";
 import Modal from "../Modal/Modal";
 import { useThemeContext } from "@/utils/Theme";
 import { ThemeI } from "@/Interfaces/Theme";
-import ThemeSwitch from "../ThemeSwitcher/ThemeSwitcher";
 import Menu from "../../../public/images/menu.svg";
 import Search from "../../../public/images/search.svg";
 import Smile from "../../../public/images/smile.svg";
@@ -47,7 +46,6 @@ export default function Header() {
             alt={"Logo text"}
           />
         </Link>
-        <ThemeSwitch />
       </div>
       {currentPath !== "" && (
         <div className={styles.header__right}>
