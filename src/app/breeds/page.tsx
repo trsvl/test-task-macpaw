@@ -38,7 +38,6 @@ export default function BreedsPage() {
         )
         .then((response) => {
           setData(response.data.breedsImages);
-          console.log(response.data.breedsImages);
         })
         .finally(() => {
           setImageLoaded(true);

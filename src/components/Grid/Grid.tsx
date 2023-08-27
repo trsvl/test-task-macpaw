@@ -203,7 +203,7 @@ export default function Grid({
               <p>No item found</p>
             </div>
           )}
-          {(currentPath === "breeds" || currentPath === "gallery") && (
+          {(currentPath === "breeds" || currentPath === "gallery" || currentPath === "search") && (
             <Pagination state={!emptyArr} />
           )}
         </>

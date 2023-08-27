@@ -15,6 +15,7 @@ export const ThemeContextProvider = ({ children }: any) => {
   const [sorted, setSorted] = useState<"ASC" | "DESC">("ASC");
   const [clicked, setClicked] = useState(false);
   const [page, setPage] = useState("0");
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     if (imageHistory.length === 5) {
@@ -42,6 +43,8 @@ export const ThemeContextProvider = ({ children }: any) => {
         setClicked,
         page,
         setPage,
+        searchText,
+        setSearchText,
       }}
     >
       {children}

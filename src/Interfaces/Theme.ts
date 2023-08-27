@@ -24,4 +24,6 @@ export interface ThemeI {
   setClicked: Dispatch<SetStateAction<boolean>>;
   page: string;
   setPage: Dispatch<SetStateAction<string>>;
+  searchText: string;
+  setSearchText: Dispatch<SetStateAction<string>>;
 }

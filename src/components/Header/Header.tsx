@@ -13,7 +13,7 @@ export default function Header() {
 
   const [clickMenu, setClickMenu] = useState(false);
 
-  const { currentPath } = useThemeContext() as ThemeI;
+  const { currentPath,searchText, setSearchText } = useThemeContext() as ThemeI;
   
   const menuClickHandler = () => {
     setClickMenu(true)
@@ -55,8 +55,11 @@ export default function Header() {
               />
           </button>
           <div className={styles.input__wrapper}>
-            <input type="text" placeholder="Search for breeds by name" />
-            <div>
+            <input type="text" placeholder="Search for breeds by name" 
+            value={searchText}
+            onChange={(e)=>setSearchText(e.target.value)}
+            />
+            <Link href={"/search"}>
               <Image
                 src={"/images/search.svg"}
                 width={20}
@@ -71,7 +74,7 @@ export default function Header() {
                 alt="Search image"
                 className={styles.second__img}
               />
-            </div>
+            </Link>
           </div>
           <Link
             href={"/likes"}
