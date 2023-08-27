@@ -3,23 +3,22 @@
 import { useState, useRef } from "react";
 import styles from "./modal.module.scss";
 import Cards from "../LeftSide/Cards";
-import { GetPath } from "@/utils/GetPath";
 import Image from "next/image";
-import { useThemeContext } from "@/utils/Theme";
 import axios from "axios";
-const { v4: uuidv4 } = require("uuid");
+import Close from "../../../public/images/close.svg";
 
 interface Props {
   setClickMenu: (prev: boolean) => void;
+  menu: boolean;
 }
 
-export default function Modal({ setClickMenu }: Props) {
-  const { currentPath } = useThemeContext();
+export default function Modal({ setClickMenu, menu }: Props) {
   const [name, setName] = useState("");
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleImageClick = () => {
     if (fileInputRef.current) {
@@ -60,6 +59,7 @@ export default function Modal({ setClickMenu }: Props) {
 
   const uploadHandler = async () => {
     if (file) {
+      setLoading(true);
       const formData = new FormData();
       formData.append("file", file);
       console.log("test");
@@ -76,30 +76,19 @@ export default function Modal({ setClickMenu }: Props) {
         setStatus(response.status);
       } catch (error) {
         setStatus(500);
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   return (
     <>
-      {currentPath === "gallery" ? (
+      {!menu ? (
         <div className={styles.wrapper__upload}>
           <div className={styles.container__upload}>
             <button className={styles.btn} onClick={closeClickHandler}>
-              <Image
-                src={"/images/close.svg"}
-                width={20}
-                height={20}
-                alt="Back"
-                className={styles.first__img}
-              />
-              <Image
-                src={"/images/close-white.svg"}
-                width={20}
-                height={20}
-                alt="Back"
-                className={styles.second__img}
-              />
+              <Close />
             </button>
             <div className={styles.flex}>
               <h1>Upload a .jpg or .png Cat Image</h1>
@@ -150,8 +139,13 @@ export default function Modal({ setClickMenu }: Props) {
                 ref={fileInputRef}
               />
               {name && status == 0 && (
-                <button onClick={uploadHandler} className={styles.upload}>
-                  UPLOAD PHOTO
+                <button
+                  disabled={loading}
+                  onClick={uploadHandler}
+                  className={styles.upload}
+                >
+                  {loading && <div className={styles.loader}></div>}
+                  <p>UPLOAD PHOTO</p>
                 </button>
               )}
             </div>
@@ -186,20 +180,7 @@ export default function Modal({ setClickMenu }: Props) {
       ) : (
         <div className={styles.wrapper}>
           <button className={styles.btn} onClick={closeClickHandler}>
-            <Image
-              src={"/images/close.svg"}
-              width={20}
-              height={20}
-              alt="Back"
-              className={styles.first__img}
-            />
-            <Image
-              src={"/images/close-white.svg"}
-              width={20}
-              height={20}
-              alt="Back"
-              className={styles.second__img}
-            />
+            <Close />
           </button>
           <div>
             <Cards cardClickHandler={cardClickHandler} />

@@ -1,21 +1,21 @@
-$light_pink: #fbe0dc;
-$dark_pink: #ff868e;
+@import "../../colors";
 
-.control-dots{
-    .dot, .selected{
-        background-color: $light_pink !important;
-        box-shadow: none !important;
-        opacity: 1 !important;
-        height: 10px !important;
-        width: 10px !important; 
-      }
-      .dot:hover{
-        background-color: $dark_pink !important;
-      }
-      .selected{
-        background-color: $dark_pink !important;
-      }
-}
-  .carousel-slider{
-    overflow:visible !important;
+.control-dots {
+  .dot,
+  .selected {
+    background-color: $pink_100 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    height: 10px !important;
+    width: 10px !important;
   }
+  .dot:hover {
+    background-color: $pink_200 !important;
+  }
+  .selected {
+    background-color: $pink_200 !important;
+  }
+}
+.carousel-slider {
+  overflow: visible !important;
+}

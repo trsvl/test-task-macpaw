@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import axios from "axios";
@@ -44,7 +45,6 @@ export default function LikesPage() {
 
     return () => clearTimeout(timer);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, searchText]);
 
   return (

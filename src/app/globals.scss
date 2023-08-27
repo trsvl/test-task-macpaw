@@ -1,10 +1,12 @@
+@import "./colors";
+
 * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  background: #e7e7e7; //#f8f8f7;
+  background: $grey_100;
   padding: 30px;
 }
 
@@ -17,17 +19,17 @@ h1 {
   font-size: 44px;
   font-weight: 500;
   line-height: 58px;
-  color: #1d1d1d;
+  color: $black_100;
 }
 h2 {
   font-size: 20px;
   font-weight: 400;
-  color: #8c8c8c;
+  color: $grey_300;
 }
 h3 {
   font-size: 20px;
   font-weight: 500;
-  color: #1d1d1d;
+  color: $black_100;
 }
 img {
   user-select: none;
@@ -38,8 +40,8 @@ img {
   height: 50px;
   border-radius: 50%;
   border: 4px solid;
-  border-color: #e4e4ed;
-  border-right-color: #ff868e;
+  border-color: $grey_200;
+  border-right-color: $pink_200;
   animation: s2 1s infinite linear;
 }
 

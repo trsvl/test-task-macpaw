@@ -4,7 +4,7 @@ import { Jost } from "next/font/google";
 import LeftSide from "@/components/LeftSide/LeftSide";
 import Header from "@/components/Header/Header";
 import RightSide from "@/components/RightSide/RightSide";
-import { ThemeContextProvider } from "@/utils/Theme";
+import Providers from "@/components/Providers/Providers";
 
 const jost = Jost({ subsets: ["latin"], display: "fallback" });
 
@@ -21,13 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={jost.className}>
-        <ThemeContextProvider>
+        <Providers>
           <Header />
           <main>
             <LeftSide />
             <RightSide>{children}</RightSide>
           </main>
-        </ThemeContextProvider>
+        </Providers>
       </body>
     </html>
   );

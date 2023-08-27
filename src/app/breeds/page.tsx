@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import axios from "axios";
@@ -6,8 +7,6 @@ import Grid from "@/components/Grid/Grid";
 import { useThemeContext } from "@/utils/Theme";
 
 export default function BreedsPage() {
-
-
   const {
     selectBreed,
     selectLimit,
@@ -24,14 +23,13 @@ export default function BreedsPage() {
 
   useEffect(() => {
     setPage("0");
-  },[])
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
-
       setAllowClick(false);
       setImageLoaded(false);
-      
+
       await axios
         .get(
           `/api/breeds/images?limit=${selectLimit}&page=${page}&order=${sorted}&breed_ids=${selectBreed}&breed=1`
@@ -48,10 +46,8 @@ export default function BreedsPage() {
         });
     };
 
-    getData()
-
+    getData();
   }, [clicked, selectBreed, selectLimit, page, sorted, setAllowClick]);
-
 
   return (
     <Grid

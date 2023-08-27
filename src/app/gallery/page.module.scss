@@ -1,109 +1,109 @@
-$light_pink: #fbe0dc;
+@import "../colors";
 
-.options{
-    margin-top: 20px;
-    background-color: #F8F8F7;
-    border-radius: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px 20px;
-    gap: 10px 20px;
-    position: relative;
-    &>div{
-         select {
-            padding: 0 10px;
-            min-width: 290px;
-            font-family: inherit;
-            cursor: pointer;
-            outline: none;
-            border-radius: 10px;
-            background-color: #ffffff;
-            height: 40px;
-            border: 2px solid #f8f8f7;
-            box-sizing: border-box;
-            align-items: center;
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 24px;
-            color: #8c8c8c;
-            &:disabled{
-              cursor: not-allowed;
-            }
-            &:hover {
-              border: 2px solid #fbe0dc;
-            }
-            p {
-              font-size: 16px;
-              font-weight: 400;
-              line-height: 24px;
-              color: #8c8c8c;
-            }
-          }
-        p{
-            margin-left: 12px;
-font-size: 10px;
-font-weight: 500;
-line-height: 18px;
-color: #8C8C8C;
-            select{
-                width: 100%;
-                border-radius: 10px;
-                background-color: #ffffff;
-                font-family: inherit;
-font-size: 16px;
-font-weight: 400;
-line-height: 24px;
-            }
-        }
+.options {
+  margin-top: 20px;
+  background-color: $grey_100;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  gap: 10px 20px;
+  position: relative;
+  & > div {
+    select {
+      padding: 0 10px;
+      min-width: 290px;
+      font-family: inherit;
+      cursor: pointer;
+      outline: none;
+      border-radius: 10px;
+      background-color: $white;
+      height: 40px;
+      border: 2px solid $grey_100;
+      box-sizing: border-box;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: $grey_300;
+      &:disabled {
+        cursor: not-allowed;
+      }
+      &:hover {
+        border: 2px solid $pink_100;
+      }
+      p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: $grey_300;
+      }
     }
+    p {
+      margin-left: 12px;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 18px;
+      color: $grey_300;
+      select {
+        width: 100%;
+        border-radius: 10px;
+        background-color: $white;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+    }
+  }
 }
-.flex{
-    display: flex;
-    gap: 10px;
-    select{
-        min-width: 240px !important;
-    }
+.flex {
+  display: flex;
+  gap: 10px;
+  select {
+    min-width: 240px !important;
+  }
 }
-.update__data{
-    cursor: pointer;
-    border: none;
-    height: 40px;
-    width: 40px;
-    min-width: 40px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &:hover{
-        background-color: $light_pink;
-    }
+.update__data {
+  cursor: pointer;
+  border: none;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 10px;
+  background-color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: $pink_100;
+  }
 }
 
-@media(max-width: 1320px){
-    .options{
-        &>div{
-            width: calc(50% - 10px);
-             select {
-                width: 100%;
-             }
-            }
-        }
+@media (max-width: 1320px) {
+  .options {
+    & > div {
+      width: calc(50% - 10px);
+      select {
+        width: 100%;
+      }
+    }
+  }
 }
-@media(max-width: 760px){
-    .options{
-        select{
-            min-width: 150px !important;
-        }
-      
-        &>div{
-            width: 100%;
-            }
-        }
-        .flex{
-            flex-direction: column;
-            button{
-                width: 100%;
-            }
-        }
+@media (max-width: 760px) {
+  .options {
+    select {
+      min-width: 150px !important;
+    }
+
+    & > div {
+      width: 100%;
+    }
+  }
+  .flex {
+    flex-direction: column;
+    button {
+      width: 100%;
+    }
+  }
 }

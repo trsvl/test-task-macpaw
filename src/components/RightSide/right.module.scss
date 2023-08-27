@@ -1,5 +1,4 @@
-$light_pink: #fbe0dc;
-$dark_pink: #ff868e;
+@import "../../app/colors";
 
 @mixin center {
   left: 50%;
@@ -34,7 +33,7 @@ $dark_pink: #ff868e;
   min-height: 782px;
   max-height: 100%;
   border-radius: 20px;
-  background-color: #ffffff;
+  background-color: $white;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -52,70 +51,61 @@ $dark_pink: #ff868e;
   min-width: 40px;
   width: 40px;
   height: 40px;
-  background-color: $light_pink;
+  background-color: $pink_100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    background-color: $dark_pink;
-  }
-  &:hover {
-    .first__img {
-      display: none;
+    background-color: $pink_200;
+    svg {
+      path {
+        fill: $white;
+      }
     }
-    .second__img {
-      display: block;
-    }
-  }
-  .first__img {
-    position: relative;
-    @include center;
-  }
-  .second__img {
-    position: relative;
-    @include center;
-    display: none;
   }
 }
 
 .selected {
- @include selected($dark_pink, #ffffff);
+  @include selected($pink_200, $white);
 }
 .selected1 {
-  @include selected($light_pink, $dark_pink);
- }
- .selected2 {
-  @include selected($dark_pink, #ffffff);
- }
+  @include selected($pink_100, $pink_200);
+}
+.selected2 {
+  @include selected($pink_200, $white);
+}
 
 .breeds__wrapper {
   display: flex;
   gap: 10px;
 
-
-  & > select,button {
+  & > select,
+  button {
     font-family: inherit;
     cursor: pointer;
     outline: none;
     border-radius: 10px;
-    background-color: #f8f8f7;
+    background-color: $grey_100;
     height: 40px;
-    border: 2px solid #f8f8f7;
+    border: 2px solid $grey_100;
     box-sizing: border-box;
     align-items: center;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    color: #8c8c8c;
-    &:disabled{
+    color: $grey_300;
+    &:disabled {
       cursor: not-allowed;
     }
     &:hover {
-      border: 2px solid #fbe0dc;
+      border: 2px solid $pink_100;
     }
     p {
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
-      color: #8c8c8c;
+      color: $grey_300;
     }
   }
   select:nth-child(1) {
@@ -142,22 +132,22 @@ $dark_pink: #ff868e;
     img:last-child {
       display: none;
     }
-    &:disabled{
+    &:disabled {
       cursor: not-allowed;
     }
     &:hover {
-      img:first-child {
-        display: none;
-      }
-      img:last-child {
-        display: block;
+      svg {
+        path {
+          fill: $pink_200;
+        }
       }
     }
   }
 }
 
-.upload__wrapper{
-  background-color:  $light_pink;
+.upload__wrapper {
+  font-family: inherit;
+  background-color: $pink_100;
   height: 40px;
   padding: 0 30px;
   display: flex;
@@ -168,44 +158,30 @@ $dark_pink: #ff868e;
   margin-left: auto;
   border: none;
   cursor: pointer;
-  &:disabled{
+  &:disabled {
     cursor: not-allowed;
   }
-  p{
-font-size: 12px;
-font-weight: 500;
-line-height: 16px;
-letter-spacing: 2px;
-text-align: center;
-color: $dark_pink;
+  p {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-align: center;
+    color: $pink_200;
   }
-  img:nth-child(2){
+  img:nth-child(2) {
     display: none;
   }
-  &:hover{
-    img:nth-child(1){
-      display: none;
+  &:hover {
+    background-color: $pink_200;
+    p {
+      color: $white;
     }
-    img:nth-child(2){
-      display: block;
+    svg {
+      path {
+        fill: $white;
+      }
     }
-  }
-}
-
-.loader {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 2px solid;
-  border-color: #e4e4ed;
-  border-right-color: #ff868e;
-  animation: s2 1s infinite linear;
-  display: none;
-}
-
-@keyframes s2 {
-  to {
-    transform: rotate(1turn);
   }
 }
 
@@ -240,15 +216,12 @@ color: $dark_pink;
       flex: 0 0 calc(100% - 100px);
     }
   }
-  .upload__wrapper{
+  .upload__wrapper {
     margin-left: 0;
     order: 2;
     flex: 0 0 100%;
   }
-  .subheader{
+  .subheader {
     flex-wrap: wrap;
-   
   }
-
 }
-

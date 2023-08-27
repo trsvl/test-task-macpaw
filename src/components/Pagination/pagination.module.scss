@@ -1,3 +1,5 @@
+@import "../../app/colors";
+
 .wrapper {
   display: flex;
   margin-top: 40px;
@@ -8,6 +10,7 @@
   justify-content: space-between;
 
   @mixin btn($bg, $color) {
+    user-select: none;
     cursor: pointer;
     border-radius: 10px;
     border: none;
@@ -19,8 +22,8 @@
     gap: 10px;
     background-color: $bg;
     font-family: inherit;
-    path{
-        fill: $color;
+    path {
+      fill: $color;
     }
     p {
       font-size: 12px;
@@ -31,18 +34,18 @@
     }
   }
   button {
-    @include btn(#fbe0dc, #FF868E);
-    &:hover{
-        @include btn(#FF868E, #ffffff);  
+    @include btn($pink_100, $pink_200);
+    &:hover {
+      @include btn($pink_200, $white);
     }
-    &:disabled{
-        @include btn(#F8F8F7, #8C8C8C);
-        cursor: default;  
+    &:disabled {
+      @include btn($grey_100, $grey_300);
+      cursor: default;
     }
   }
 }
-@media (max-width: 520px){
-    .wrapper{
-        width: 250px;
-    }
+@media (max-width: 520px) {
+  .wrapper {
+    width: 250px;
+  }
 }

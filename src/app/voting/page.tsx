@@ -8,9 +8,12 @@ import { blurURL } from "@/utils/StaticVar";
 import { SearchData } from "@/Interfaces/SearchData";
 import { useThemeContext } from "@/utils/Theme";
 import { getCurrentTime } from "@/utils/GetTime";
+import Smile from "../../../public/images/smile.svg";
+import Favourite from "../../../public/images/favourite.svg";
+import Sad from "../../../public/images/sad.svg";
 const { v4: uuidv4 } = require("uuid");
 
-export default function VotingPage() {
+export default function Page() {
   const [data, setData] = useState<SearchData>({
     id: "",
     url: "",
@@ -151,38 +154,16 @@ export default function VotingPage() {
           className={clickState === 1 ? styles.btn1__click : styles.btn1}
           onClick={() => clickState === 0 && clickHandler(1)}
         >
-          <Image
-            src={"/images/smiling-face1.svg"}
-            width={30}
-            height={30}
-            alt="Button favourite"
-          />
-          <Image
-            src={"/images/smiling-face-green.svg"}
-            width={30}
-            height={30}
-            alt="Button favourite"
-          />
+          <Smile />
         </button>
         <button
           disabled={!imageLoaded}
           className={clickState === 2 ? styles.btn2__click : styles.btn2}
           onClick={() => clickState === 0 && clickHandler(2)}
         >
+          <Favourite />
           <Image
-            src={"/images/favourite1.svg"}
-            width={30}
-            height={26}
-            alt="Button like"
-          />
-          <Image
-            src={"/images/favourite-color1.svg"}
-            width={30}
-            height={26}
-            alt="Button like"
-          />
-          <Image
-            src={"/images/favourite.svg"}
+            src={"/images/favourite-fill.svg"}
             width={30}
             height={26}
             alt="Button like"
@@ -193,18 +174,7 @@ export default function VotingPage() {
           className={clickState === 3 ? styles.btn3__click : styles.btn3}
           onClick={() => clickState === 0 && clickHandler(3)}
         >
-          <Image
-            src={"/images/sad-face1.svg"}
-            width={30}
-            height={30}
-            alt="Button dislike"
-          />
-          <Image
-            src={"/images/sad-face-yellow.svg"}
-            width={30}
-            height={30}
-            alt="Button dislike"
-          />
+          <Sad />
         </button>
       </div>
     </div>

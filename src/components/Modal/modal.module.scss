@@ -1,3 +1,5 @@
+@import "../../app/colors";
+
 @mixin btn($margin) {
   .btn {
     cursor: pointer;
@@ -7,27 +9,23 @@
     height: 60px;
     width: 60px;
     border-radius: 20px;
-    background-color: #ffffff;
+    background-color: $white;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    .second__img {
-      display: none;
-    }
     &:hover {
-      background-color: #ff868e;
-      .first__img {
-        display: none;
-      }
-      .second__img {
-        display: block;
+      background-color: $pink_200;
+      svg {
+        path {
+          fill: $white;
+        }
       }
     }
   }
 }
 
-@mixin img__wrapper($border,$bg) {
+@mixin img__wrapper($border, $bg) {
   position: relative;
   overflow: hidden !important;
   .current__img {
@@ -65,7 +63,7 @@
   left: 0;
   top: 0;
   z-index: 10;
-  background-color: #f8f8f7;
+  background-color: $grey_100;
   width: 100%;
   height: 100%;
   @include btn(30px);
@@ -80,7 +78,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  background-color: #1d1d1d99;
+  background-color: $black_200;
   z-index: 10;
   height: 100%;
   width: 100%;
@@ -95,7 +93,7 @@
   max-width: 680px;
   width: 100%;
   height: calc(100% - 60px);
-  background-color: #f8f8f7;
+  background-color: $grey_100;
   border-radius: 20px;
   top: 30px;
   right: 30px;
@@ -103,10 +101,10 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
-    color: #8c8c8c;
+    color: $grey_300;
   }
   h1 {
-    color: #1d1d1d;
+    color: $black_100;
     font-size: 36px;
     font-weight: 500;
     line-height: 52px;
@@ -116,13 +114,13 @@
     width: 100%;
   }
   h2 {
-    color: #8c8c8c;
+    color: $grey_300;
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
     text-align: center;
     span {
-      color: #ff868e;
+      color: $pink_200;
     }
   }
   h3 {
@@ -131,13 +129,13 @@
     line-height: 30px;
     letter-spacing: 0em;
     text-align: center;
-    color: #1d1d1d;
+    color: $black_100;
   }
   span {
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
-    color: #8c8c8c;
+    color: $grey_300;
   }
 }
 .flex {
@@ -147,20 +145,19 @@
   justify-content: center;
 }
 .paste__img__wrapper {
-  @include img__wrapper(#fbe0dc,#ffffff);
+  @include img__wrapper($pink_100, $white);
 }
 .paste__img__wrapper__wrong {
-  @include img__wrapper(#FF868E,#FBE0DC);
-  img:first-child{
+  @include img__wrapper($pink_200, $pink_100);
+  img:first-child {
     width: calc(100% - 80px) !important;
     height: 280px !important;
     position: absolute;
     left: 50% !important;
     top: 50% !important;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     border-radius: 10px;
   }
- 
 }
 .upload {
   font-family: inherit;
@@ -168,24 +165,43 @@
   border: none;
   height: 40px;
   padding: 0 30px;
-  color: #ffffff;
-  background-color: #ff868e;
+  background-color: $pink_200;
   border-radius: 10px;
   margin-top: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 2px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  p {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-align: center;
+    color: $white;
+  }
+  &:hover {
+    p {
+      color: $pink_200;
+    }
+    background-color: $pink_100;
+  }
+  &:disabled {
+    cursor: default;
+    background-color: $pink_200;
+    p {
+      color: $white;
+    }
+  }
 }
 .result {
   padding: 0 30px;
-  &>div{
+  & > div {
     margin-top: 20px;
     width: 100%;
     height: 60px;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: $white;
     display: flex;
     align-items: center;
     justify-content: baseline;
@@ -197,26 +213,41 @@
       font-weight: 400;
       line-height: 24px;
       text-align: left;
-      color: #8c8c8c;
+      color: $grey_300;
     }
-  }  
+  }
+}
 
+.loader {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid;
+  border-color: $grey_200;
+  border-right-color: $pink_200;
+  animation: s2 1s infinite linear;
 }
+
+@keyframes s2 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 @media (max-width: 740px) {
- .container__upload{
-  position: relative;
-  padding: 20px;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-  height: 100% ;
-  top: 0;
-  right: 0;
-  border-radius: 0;
-  
+  .container__upload {
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    border-radius: 0;
+  }
 }
-}
-@media (max-width: 600px){
+@media (max-width: 600px) {
   .container__upload {
     h1 {
       font-size: 20px;
@@ -225,11 +256,10 @@
   }
   .result {
     padding: 0;
-}
-.current__img {
-  height: 150px !important; 
-}
-
+  }
+  .current__img {
+    height: 150px !important;
+  }
 }
 
 @media (max-width: 520px) {
@@ -239,14 +269,12 @@
     }
   }
   .paste__img__wrapper,
-.paste__img__wrapper__wrong {
-  height: 165px;
-  max-width: 100% !important;
-  img:first-child{
-    height: 150px !important;
-    width: calc(100% - 40px) !important;
+  .paste__img__wrapper__wrong {
+    height: 165px;
+    max-width: 100% !important;
+    img:first-child {
+      height: 150px !important;
+      width: calc(100% - 40px) !important;
+    }
   }
- 
 }
-}
-

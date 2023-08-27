@@ -1,14 +1,15 @@
-.text{
-font-size: 20px;
-margin-top: 20px;
-font-weight: 400;
-line-height: 29px;
-color: #8C8C8C;
-strong{
+@import "../colors";
+
+.text {
+  font-size: 20px;
+  margin-top: 20px;
+  font-weight: 400;
+  line-height: 29px;
+  color: $grey_300;
+  strong {
     font-size: 20px;
     font-weight: 500;
     line-height: 29px;
-    color: #1D1D1D;
-}
-
+    color: $black_100;
+  }
 }

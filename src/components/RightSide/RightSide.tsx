@@ -1,16 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./right.module.scss";
 import { ReactNode, useState, useEffect } from "react";
-import { currentPageOptions } from "@/Interfaces/CurrentPath";
 import { useThemeContext } from "@/utils/Theme";
-import { ThemeI } from "@/Interfaces/Theme";
 import ImageHistory from "../ImageHistory/imageHistory";
 import axios from "axios";
-import Pagination from "../Pagination/Pagination";
 import { GetInnerPath, GetInnerPathId } from "@/utils/GetPath";
 import Modal from "../Modal/Modal";
+import Back from "../../../public/images/back.svg";
+import Upload from "../../../public/images/upload.svg";
+import SortUp from "../../../public/images/sort-up.svg";
+import SortDown from "../../../public/images/sort-down.svg";
 
 interface Props {
   children: ReactNode;
@@ -21,7 +21,7 @@ interface BreedsI {
 }
 
 export default function RightSide(props: Props) {
-  const { currentPath } = useThemeContext() as ThemeI;
+  const { currentPath } = useThemeContext();
 
   const [data, setData] = useState<BreedsI[]>([]);
   const [uploadClick, setUploadClick] = useState(false);
@@ -48,68 +48,45 @@ export default function RightSide(props: Props) {
   }, [currentPath]);
 
   const uploadClickHandler = () => {
-    setUploadClick(true)
+    setUploadClick(true);
     document.body.style.overflow = "hidden";
-  }
- 
+  };
 
   return (
     <>
       {currentPath !== "" ? (
         <div className={styles.right}>
-          {uploadClick && <Modal setClickMenu={setUploadClick}/>}
+          {uploadClick && <Modal setClickMenu={setUploadClick} menu={false} />}
           <div className={styles.subheader}>
             <div
               className={styles.back__wrapper}
               onClick={() => history.back()}
             >
-              <Image
-                src={"/images/back.svg"}
-                width={20}
-                height={20}
-                alt="Back"
-                className={styles.first__img}
-              />
-              <Image
-                src={"/images/back1.svg"}
-                width={20}
-                height={20}
-                alt="Back"
-                className={styles.second__img}
-              />
+              <Back />
             </div>
-            {GetInnerPath() >= 3
-            ? <>
-            <div className={styles.selected1}>
-            <p>BREEDS</p>
-          </div>
-          <div className={styles.selected2}>
-            <p>{GetInnerPathId()}</p>
-          </div>
-          </>
-            : <div className={styles.selected}>
-            <p>{currentPath}</p>
-          </div>
-            
-            }
-            {currentPath === "gallery" &&
-              <button onClick={uploadClickHandler} className={styles.upload__wrapper}>
-                <Image
-                src={"/images/upload.svg"}
-                width={16}
-                height={16}
-                alt="Upload"
-                />
-                   <Image
-                src={"/images/upload.svg"}
-                width={16}
-                height={16}
-                alt="Upload"
-                />
-                <div className={styles.loader}></div>
+            {GetInnerPath() >= 3 ? (
+              <>
+                <div className={styles.selected1}>
+                  <p>BREEDS</p>
+                </div>
+                <div className={styles.selected2}>
+                  <p>{GetInnerPathId()}</p>
+                </div>
+              </>
+            ) : (
+              <div className={styles.selected}>
+                <p>{currentPath}</p>
+              </div>
+            )}
+            {currentPath === "gallery" && (
+              <button
+                onClick={uploadClickHandler}
+                className={styles.upload__wrapper}
+              >
+                <Upload />
                 <p>UPLOAD</p>
               </button>
-            }
+            )}
             {currentPath === "breeds" && (
               <div className={styles.breeds__wrapper}>
                 <select
@@ -129,7 +106,6 @@ export default function RightSide(props: Props) {
                     );
                   })}
                 </select>
-
                 <select
                   value={selectLimit}
                   disabled={!allowClick}
@@ -146,50 +122,27 @@ export default function RightSide(props: Props) {
                     );
                   })}
                 </select>
-
                 <button
                   onClick={() => {
                     page != "0" && setPage("0");
                     setClicked((prev) => !prev);
                     setSelectBreed("");
-                    setSorted("DESC")
+                    setSorted("DESC");
                   }}
                   disabled={!allowClick || sorted == "DESC"}
                 >
-                  <Image
-                    src={"/images/sort-up.svg"}
-                    height={12}
-                    width={12}
-                    alt="Sort up"
-                  />
-                  <Image
-                    src={"/images/sort-up-red.svg"}
-                    height={12}
-                    width={12}
-                    alt="Sort up"
-                  />
+                  <SortUp />
                 </button>
                 <button
                   onClick={() => {
                     page != "0" && setPage("0");
                     setClicked((prev) => !prev);
                     setSelectBreed("");
-                    setSorted("ASC")
+                    setSorted("ASC");
                   }}
                   disabled={!allowClick || sorted == "ASC"}
                 >
-                  <Image
-                    src={"/images/sort-down.svg"}
-                    height={12}
-                    width={12}
-                    alt="Sort down"
-                  />
-                  <Image
-                    src={"/images/sort-down-red.svg"}
-                    height={12}
-                    width={12}
-                    alt="Sort down"
-                  />
+                  <SortDown />
                 </button>
               </div>
             )}

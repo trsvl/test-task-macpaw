@@ -1,6 +1,6 @@
+@import "../../app/colors";
+
 $ml: 117px;
-$light_pink: #fbe0dc;
-$dark_pink: #ff868e;
 
 @mixin center {
   left: 50%;
@@ -23,31 +23,37 @@ $dark_pink: #ff868e;
 }
 
 .header {
- @include header()
+  @include header();
 }
 .header2 {
-  @include header()
- }
+  @include header();
+}
 
 .logo {
-@include logo();
+  @include logo();
 }
-.logo1{
-@include logo();
+.logo1 {
+  @include logo();
 }
 .header__right {
   display: flex;
-  flex-wrap: wrap ;
+  flex-wrap: wrap;
   gap: 10px;
   input,
-  a,button {
+  a,
+  button {
     border-radius: 20px;
   }
   .input__wrapper {
     position: relative;
     &:hover {
       input {
-        border: 2px solid $light_pink;
+        border: 2px solid $pink_100;
+      }
+      svg {
+        path {
+          fill: $white;
+        }
       }
     }
     input {
@@ -58,15 +64,15 @@ $dark_pink: #ff868e;
       font-size: 20px;
       font-weight: 400;
       line-height: 30px;
-      border: 2px solid #ffffff;
+      border: 2px solid $white;
       box-sizing: border-box;
-      color: #1d1d1d;
+      color: $black_100;
       &:focus {
         outline: none;
-        border: 2px solid $dark_pink;
+        border: 2px solid $pink_200;
       }
       &::placeholder {
-        color: #8c8c8c;
+        color: $grey_300;
       }
     }
     a {
@@ -76,42 +82,34 @@ $dark_pink: #ff868e;
       top: 10px;
       width: 40px;
       height: 40px;
-      background-color: $light_pink;
+      background-color: $pink_100;
       border-radius: 10px;
 
       &:hover {
-        background-color: $dark_pink;
-      }
-      &:hover {
-        .first__img {
-          display: none;
-        }
-        .second__img {
-          display: block;
-        }
-      }
-      .first__img {
-        position: relative;
-        @include center;
-      }
-      .second__img {
-        position: relative;
-        @include center;
-        display: none;
+        background-color: $pink_200;
       }
     }
   }
-  button{
+  button {
     border: none;
-    display: none;
+    display: none !important;
     cursor: pointer;
   }
-  a, button {
+  a,
+  button {
     width: 60px;
     height: 60px;
-    background-color: #ffffff;
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      path {
+        fill: $pink_200;
+      }
+    }
     &:hover {
-      background-color: $light_pink;
+      background-color: $pink_100;
     }
     img {
       position: relative;
@@ -120,9 +118,14 @@ $dark_pink: #ff868e;
   }
 }
 .active__link {
-  background-color: $dark_pink !important;
-  &:first-child {
-    display: none;
+  background-color: $pink_200 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    path {
+      fill: $white !important;
+    }
   }
 }
 
@@ -130,13 +133,13 @@ $dark_pink: #ff868e;
   .header2 {
     margin-left: 0;
   }
-  .logo1 {
+  .left {
     display: none;
   }
-  .header__right{
+  .header__right {
     width: 100% !important;
-    &>button{
-      display: flex;
+    button {
+      display: flex !important;
     }
   }
   .input__wrapper {
@@ -154,20 +157,18 @@ $dark_pink: #ff868e;
 }
 
 @media (max-width: 540px) {
-  .header__right{
-    flex-wrap: wrap ;
-    &>*,button{
+  .header__right {
+    flex-wrap: wrap;
+    & > *,
+    button {
       flex-direction: column;
     }
-    &>div {
+    & > div {
       order: 1;
       flex: 0 0 100%;
     }
-    &>button{
+    & > button {
       margin-right: auto;
     }
   }
-
-
- 
 }

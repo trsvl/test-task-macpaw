@@ -12,25 +12,21 @@ export async function GET(requset: NextRequest) {
     const mime_types = url.searchParams.get("mime_types");
     const breed = url.searchParams.get("breed");
 
-    interface dataI {
-      id: string;
-      breeds: { name: string }[];
-      url: string;
-    }
+    const response = await axios.get(
+      `${
+        process.env.API_URL
+      }/images/search?limit=${limit}&page=${page}&order=${order}&has_breeds=${
+        breed ? "1" : breed_ids ? "1" : "0"
+      }&breed_ids=${breed_ids}&mime_types=${mime_types}`,
+      {
+        headers: {
+          "x-api-key": process.env.API_KEY || "",
+        },
+      }
+    );
+    const breedsImages = response.data;
 
-      const response = await axios.get(
-        `${process.env.API_URL}/images/search?limit=${limit}&page=${page}&order=${order}&has_breeds=${breed ? "1" : breed_ids ? "1" : "0"}&breed_ids=${breed_ids}&mime_types=${mime_types}`,
-        {
-          headers: {
-            "x-api-key": process.env.API_KEY || "",
-          },
-        }
-      );
-      const breedsImages = response.data
-     
-        return NextResponse.json({ breedsImages });
-     
-      
+    return NextResponse.json({ breedsImages });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

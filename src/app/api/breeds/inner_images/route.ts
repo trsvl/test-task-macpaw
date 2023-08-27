@@ -7,25 +7,17 @@ export async function GET(requset: NextRequest) {
 
     const id = url.searchParams.get("id");
 
-    interface dataI {
-      id: string;
-      breeds: { name: string }[];
-      url: string;
-    }
+    const response = await axios.get(
+      `${process.env.API_URL}/images/search?limit=5&breed_ids=${id}`,
+      {
+        headers: {
+          "x-api-key": process.env.API_KEY || "",
+        },
+      }
+    );
+    const innerImages = response.data;
 
-      const response = await axios.get(
-        `${process.env.API_URL}/images/search?limit=5&breed_ids=${id}`,
-        {
-          headers: {
-            "x-api-key": process.env.API_KEY || "",
-          },
-        }
-      );
-      const innerImages = response.data
-     
-        return NextResponse.json({ innerImages });
-     
-      
+    return NextResponse.json({ innerImages });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

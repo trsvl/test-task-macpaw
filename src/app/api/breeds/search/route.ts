@@ -3,15 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const response = await axios.get(
-      `${process.env.API_URL}/breeds`,
-      {
-        headers: {
-          "x-api-key": process.env.API_KEY || "",
-        },
-      }
-    );
-    const breeds = response.data.map((item: {id: string, name: string})=>({
+    const response = await axios.get(`${process.env.API_URL}/breeds`, {
+      headers: {
+        "x-api-key": process.env.API_KEY || "",
+      },
+    });
+    const breeds = response.data.map((item: { id: string; name: string }) => ({
       id: item.id,
       name: item.name,
     }));
@@ -21,4 +18,3 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-

@@ -1,3 +1,5 @@
+@import "../../app/colors";
+
 .wrapper {
   position: relative;
   width: 100%;
@@ -33,7 +35,7 @@
   cursor: pointer;
   .bg {
     position: absolute;
-    background-color: #ff868e99;
+    background-color: $pink_400;
     height: 100%;
     width: 100%;
     z-index: 1;
@@ -49,13 +51,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
+    background-color: $white;
     border-radius: 10px;
     display: none;
     z-index: 2;
   }
   &:hover {
-    background-color: #ff868e99;
+    background-color: $pink_400;
     .bg {
       display: block;
     }
@@ -82,7 +84,7 @@
 .no__item {
   margin-top: 40px;
   height: 60px;
-  background-color: #f8f8f7;
+  background-color: $grey_100;
   padding: 18px 20px;
 
   box-sizing: border-box;
@@ -90,7 +92,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    color: #8c8c8c;
+    color: $grey_300;
   }
 }
 
@@ -100,7 +102,7 @@
   user-select: none;
   width: calc(100% - 20px);
   height: min-content;
-  background-color: #ffffff;
+  background-color: $white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,7 +110,7 @@
   bottom: 10px;
   z-index: 2;
   p {
-    color: #ff868e;
+    color: $pink_200;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -116,22 +118,20 @@
     text-align: center;
   }
 }
-.loader__small{
+.loader__small {
   @keyframes s2 {
     to {
       transform: rotate(1turn);
     }
   }
- 
+
   width: 15px;
   height: 15px;
   border-radius: 50%;
   border: 2px solid;
-  border-color: #e4e4ed;
-  border-right-color: #ff868e;
+  border-color: $grey_200;
+  border-right-color: $pink_200;
   animation: s2 1s infinite linear;
-
-
 }
 
 @media (max-width: 520px) {

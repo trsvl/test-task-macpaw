@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import axios from "axios";
@@ -56,14 +57,13 @@ export default function GalleryPage() {
     };
 
     getData();
+    
   }, [click, page]);
 
   const reloadHandler = () => {
     setPage("0");
     setClick((prev) => !prev);
   };
-
-
 
   return (
     <>

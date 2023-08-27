@@ -13,19 +13,14 @@ export async function GET(requset: NextRequest) {
       url: string;
     }
 
-      const response = await axios.get(
-        `${process.env.API_URL}/breeds/${id}`,
-        {
-          headers: {
-            "x-api-key": process.env.API_KEY || "",
-          },
-        }
-      );
-      const breedInfo = response.data
-     
-        return NextResponse.json({ breedInfo });
-     
-      
+    const response = await axios.get(`${process.env.API_URL}/breeds/${id}`, {
+      headers: {
+        "x-api-key": process.env.API_KEY || "",
+      },
+    });
+    const breedInfo = response.data;
+
+    return NextResponse.json({ breedInfo });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

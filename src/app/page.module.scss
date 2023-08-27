@@ -1,6 +1,6 @@
+@import "./colors";
+
 $ml: 117px;
-$light_pink: #fbe0dc;
-$dark_pink: #ff868e;
 
 .right {
   right: 0;
@@ -14,7 +14,7 @@ $dark_pink: #ff868e;
   &::after {
     content: "";
     position: absolute;
-    background-color: $light_pink;
+    background-color: $pink_100;
     border-radius: 20px;
     width: 680px;
     height: 840px;

@@ -111,13 +111,13 @@ export default function Grid({
     }
   };
 
-  const emptyArr = data.length !== 0;
+  const notEmptyArr = data.length !== 0;
 
   return (
     <div className={styles.wrapper}>
       {imageLoaded ? (
         <>
-          {emptyArr ? (
+          {notEmptyArr ? (
             <>
               <div className={styles.grid}>
                 {data.map((item: Data) => {
@@ -203,9 +203,9 @@ export default function Grid({
               <p>No item found</p>
             </div>
           )}
-          {(currentPath === "breeds" || currentPath === "gallery" || currentPath === "search") && (
-            <Pagination state={!emptyArr} />
-          )}
+          {(currentPath === "breeds" ||
+            currentPath === "gallery" ||
+            currentPath === "search") && <Pagination state={!notEmptyArr} />}
         </>
       ) : (
         <div className={styles.center}>

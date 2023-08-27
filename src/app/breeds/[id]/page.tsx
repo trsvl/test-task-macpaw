@@ -1,12 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import styles from "./page.module.scss";
-import { SearchData } from "@/Interfaces/SearchData";
-import { useThemeContext } from "@/utils/Theme";
-import { getCurrentTime } from "@/utils/GetTime";
 import { blurURL } from "@/utils/StaticVar";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -54,7 +52,6 @@ export default function CertainBreed({ params }: { params: { id: string } }) {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
